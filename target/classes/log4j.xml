@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="true">
+
+	<appender name="ROOT" class="org.apache.log4j.rolling.RollingFileAppender" > 
+		<param name="file" value="/u01/logs/root.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+	
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<!-- The file to roll to, this is a fairly intelligent parameter, if the file
+	    	ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+	    	default is yyyy-MM-dd, (rolls at midnight)
+	        See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+        	<param name="FileNamePattern" value="/u01/logs/root.log.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+    		<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="SPRINGS" class="org.apache.log4j.rolling.RollingFileAppender" > 
+		<param name="file" value="/u01/logs/springs.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+	
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<!-- The file to roll to, this is a fairly intelligent parameter, if the file
+	    	ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+	    	default is yyyy-MM-dd, (rolls at midnight)
+	        See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+        	<param name="FileNamePattern" value="/u01/logs/springs.log.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+    		<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="SECURITY" class="org.apache.log4j.rolling.RollingFileAppender" > 
+		<param name="file" value="/u01/logs/security.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+	
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<!-- The file to roll to, this is a fairly intelligent parameter, if the file
+	    	ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+	    	default is yyyy-MM-dd, (rolls at midnight)
+	        See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+        	<param name="FileNamePattern" value="/u01/logs/security.log.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+    		<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+
+
+	<appender name="aahk-demo" class="org.apache.log4j.rolling.RollingFileAppender" > 
+		<param name="file" value="/u01/logs/aahk-demo.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+	
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<!-- The file to roll to, this is a fairly intelligent parameter, if the file
+	    	ends in .gz, it gzips it, based on the date stamp it rolls at that time, 
+	    	default is yyyy-MM-dd, (rolls at midnight)
+	        See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+        	<param name="FileNamePattern" value="/u01/logs/aahk-demo.log.%d.log.gz" />
+		</rollingPolicy>
+
+		<layout class="org.apache.log4j.PatternLayout">
+    		<!-- The log message pattern -->
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+
+
+   <logger name="org.springframework.security">
+	   <level value="DEBUG"/>
+    	<appender-ref ref="SECURITY" />
+   </logger>
+
+   <logger name="org.springframework">
+	   <level value="DEBUG"/>
+    	<appender-ref ref="SPRINGS" />
+   </logger>
+
+   <logger name="com.oracle">
+	   <level value="DEBUG"/>
+    	<appender-ref ref="aahk-demo" />
+   </logger>
+
+	<root>
+    	<priority value="DEBUG" />
+        <appender-ref ref="ROOT" />
+	</root>
+
+</log4j:configuration>
